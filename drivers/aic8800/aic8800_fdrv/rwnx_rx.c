@@ -469,7 +469,7 @@ static bool rwnx_rx_data_skb(struct rwnx_hw *rwnx_hw, struct rwnx_vif *rwnx_vif,
                                  RWNX_VIF_TYPE(rwnx_vif), 0, NULL, NULL, false);
 #else
         ieee80211_amsdu_to_8023s(skb, &list, rwnx_vif->ndev->dev_addr,
-                                 RWNX_VIF_TYPE(rwnx_vif), 0, NULL, NULL);
+                                 RWNX_VIF_TYPE(rwnx_vif), 0, NULL, NULL, false);
 #endif
 
         count = skb_queue_len(&list);
@@ -1994,7 +1994,7 @@ u8 rwnx_rxdataind_aicwf(struct rwnx_hw *rwnx_hw, void *hostid, void *rx_priv)
                                &hw_rxhdr->hwvect.rx_vect2);
         rtap_len = rwnx_rx_rtap_hdrlen(&hw_rxhdr->hwvect.rx_vect1, false);
 
-        if (status == RX_STAT_MONITOR) 
+        if (status == RX_STAT_MONITOR)
         {
             /* Remove the SK buffer from the rxbuf_elems table. It will also
                unmap the buffer and then sync the buffer for the cpu */
